@@ -17,13 +17,13 @@ const icon = (
 
 export default function Washing(props) {
   const [showForm, setshowForm] = useState(false);
-  const [date, setdate] = useState({
-    val: "",
+  const [user, setuser] = useState({
+    date: "",
   });
-  const [state, setstate] = useState(true)
+  const [state, setstate] = useState(true);
   const showforms = () => {
     setshowForm(true);
-    props.settoggle(false)
+    props.settoggle(false);
   };
   const handlechange = (e) => {
     const copydate = { ...date };
@@ -46,7 +46,7 @@ export default function Washing(props) {
       </View>{" "}
       <Image
         source={require("../image/carwash.jpg")}
-        style={{ width: "90%", height: 200, margin: 20, marginTop: -10 }}
+        style={{ width: "90%", height: 200, margin: 20, marginTop: -7 }}
       />
       <View style={styles.details}>
         <Text style={{ fontWeight: "bold", marginBottom: 5 }}>
@@ -67,7 +67,7 @@ export default function Washing(props) {
           }
         />
       </View>
-      {showForm ? <Form setshowForm={setshowForm} state={setstate}/> : null}
+      {showForm ? <Form setshowForm={setshowForm} state={setstate} /> : null}
       <View>
         <Text style={{ marginLeft: 20, marginTop: 5 }}>
           Select Preferred date {"&"} Time for Exterior
@@ -78,8 +78,9 @@ export default function Washing(props) {
               style={styles.textInput}
               placeholder="Select Date & Time"
               name="val"
-              value={date.val}
+              value={user.date}
               onChange={handlechange}
+              keyboardType="numbers-and-punctuation"
             />
             <Icon name="calendar" color={"green"} />
           </View>

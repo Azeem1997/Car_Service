@@ -1,20 +1,33 @@
 import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useSelector, useDispatch } from "react-redux";
+import { settype, setcarname, setcompanyname } from "../redux/actions";
+const minus = <Icon name="minus-circle" color={"green"} />;
 
 export default function Form({ setshowForm, setstate }) {
-  const minus = <Icon name="minus-circle" color={"green"} />;
+  const { type, companyname, carname } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const hideform = () => {
     setshowForm(false);
   };
+
   const addcars = () => {
     setshowForm(false);
-    setstate(false);
+    // setstate(false);
+    settype(type);
+    setcompanyname(companyname);
+    setcarname(carname);
+    console.log(type);
+    // if(type.length >0 && companyname.length>0 && carname.length>0){
+
+    // }
   };
 
   return (
     <View style={{ marginLeft: 20, marginRight: 20 }}>
-      
       <View style={styles.header}>
         <Text style={{ fontSize: 20, marginLeft: "5%" }}>Add Your Car</Text>
         <View style={styles.button}>
@@ -26,18 +39,21 @@ export default function Form({ setshowForm, setstate }) {
         <TextInput
           style={styles.textInput}
           placeholder="Vehicle Type"
-          maxLength={20}
-          
+          onChangeText={(val) => dispatch(settype(val))}
+          // onChangeText={(val)=>handlechange(val)}
+          value={type}
         />
         <TextInput
           style={styles.textInput}
           placeholder="Car Company"
-          maxLength={20}
+          onChangeText={(val) => dispatch(setcompanyname(val))}
+          value={companyname}
         />
         <TextInput
           style={styles.textInput}
           placeholder="Car Name"
-          maxLength={20}
+          onChangeText={(val) => dispatch(setcarname(val))}
+          value={carname}
         />
         <Button color="red" title="Add Car" onPress={addcars} />
       </View>
